@@ -1,0 +1,20 @@
+
+<dom-module id="routes-home">
+
+  <template>
+    <app-route route="{{route}}" pattern="/:home/:message" data="{{dataTail}}" ></app-route>
+      <div>
+          <h1>Now inside Home</h1>
+          <h1>[[routeData.dataTail]]</h1>
+      </div>
+    </template>
+
+    <script>
+      Polymer({
+        is: 'routes-home',
+        properties:{
+          routeData: Object
+        },
+      });
+    </script>
+</dom-module>

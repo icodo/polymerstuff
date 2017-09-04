@@ -1,0 +1,46 @@
+  <link rel="import" href="../bower_components/polymer/polymer.html">
+    <dom-module id="my-element">
+      <template>
+
+        <style>
+          :host {
+            display: block;
+            border: 1px solid red;
+          }
+          #child-element {
+            background: yellow;
+          }
+          .content-wrapper ::content > .special {
+            background: orange;
+          }
+        </style>
+
+        <p>
+          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+          when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into
+          electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
+          and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+        </p>
+
+        <div class="content-wrapper">
+          <content select=".foo"></content>
+        </div>
+
+        <p>
+          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown
+          printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining
+          essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software
+          like Aldus PageMaker including versions of Lorem Ipsum.
+        </p>
+
+        <div class="content-wrapper"><content></content></div>
+        <div id="child-element">In local DOM!</div>
+      </template>
+
+      <script>
+          Polymer({
+              is: 'my-element'
+          });
+      </script>
+
+    </dom-module>

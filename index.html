@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+
+    <title>Polymer Stuff</title>
+
+    <script>
+      window.Polymer = {
+        dom: 'shady',
+        lazyRegister: true
+      };
+
+      (function() {
+        'use strict';
+
+        var isWebComponentsSupported = (
+          'registerElement' in document
+          && 'import' in document.createElement('link')
+          && 'content' in document.createElement('template')
+        );
+
+        if (!isWebComponentsSupported) {
+          var script = document.createElement('script');
+          script.async = true;
+          script.src = '/bower_components/webcomponentsjs/webcomponents.min.js';
+          document.head.appendChild(script);
+        }
+
+      })();
+    </script>
+    <link rel="import" href="routes-app.html">
+
+  </head>
+  <body>
+    <routes-app></routes-app>
+  </body>
+</html>

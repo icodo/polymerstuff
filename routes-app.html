@@ -1,0 +1,35 @@
+  <link rel="import" href="../bower_components/polymer/polymer.html">
+  <link rel="import" href="my-element.html">
+  <link rel="import" href="routes-home.html">
+  <link rel="import" href="routes-users.html">
+  <link rel="import" href="../bower_components/app-route/app-location.html">
+  <link rel="import" href="../bower_components/app-route/app-route.html">
+  <link rel="import" href="../bower_components/iron-pages/iron-pages.html">
+
+  <dom-module id="routes-app">
+
+      <template>
+        <app-location route="{{route}}"></app-location>
+        <app-route route="{{route}}" pattern="/:home/:message" data="{{routeData}}" tail="{{dataTail}}"></app-route>
+
+        <input value="{{routeData.home::input}}" placeholder="Type a page name here.">
+        <a href="/1/test">Home</a>
+
+        <iron-pages id="pages"
+                      selected="[[routeData.home]]"
+                      attr-for-selected="page-name"
+                      selected-attribute="activePage">
+            <routes-home  page-name="1"></routes-home>
+        </iron-pages>
+
+      </template>
+
+    <script>
+        Polymer({
+            is: 'routes-app',
+            properties:{
+              routeData: Object,
+            },
+        });
+    </script>
+  </dom-module>
