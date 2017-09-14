@@ -2,10 +2,9 @@
 <dom-module id="routes-home">
 
   <template>
-    <app-route route="{{route}}" pattern="/:home/:message" data="{{dataTail}}" ></app-route>
+    <app-route route="{{route}}" pattern="/:home" ></app-route>
       <div>
-          <h1>Now inside Home</h1>
-          <h1>[[routeData.dataTail]]</h1>
+          <h1 id="test" on-track="handleTrack">Now inside Home</h1>
       </div>
     </template>
 
@@ -14,6 +13,29 @@
         is: 'routes-home',
         properties:{
           routeData: Object
+        },
+        listeners: {
+          'test.tap': 'toggle'
+        },
+        toggle: function(e){
+          alert(e.detail);
+          e.stopPropagation();
+          alert("running locally");
+        },
+
+        handleTrack: function(e){
+          switch(e.detail.state) {
+          case 'start':
+            alert('Tracking started!');
+            break;
+          case 'track':
+            this.message = 'Tracking in progress... ' +
+              alert(e.detail.x + ', ' + e.detail.y);
+            break;
+          case 'end':
+            alert('Tracking ended!');
+            break;
+        }
         },
       });
     </script>

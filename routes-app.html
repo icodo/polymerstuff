@@ -2,6 +2,8 @@
   <link rel="import" href="my-element.html">
   <link rel="import" href="routes-home.html">
   <link rel="import" href="routes-users.html">
+  <link rel="import" href="routes-component.html">
+    <link rel="import" href="routes-css.html">
   <link rel="import" href="../bower_components/app-route/app-location.html">
   <link rel="import" href="../bower_components/app-route/app-route.html">
   <link rel="import" href="../bower_components/iron-pages/iron-pages.html">
@@ -10,26 +12,58 @@
 
       <template>
         <app-location route="{{route}}"></app-location>
-        <app-route route="{{route}}" pattern="/:home/:message" data="{{routeData}}" tail="{{dataTail}}"></app-route>
+        <app-route route="{{route}}" pattern="/:home" data="{{routeData}}" tail="{{subRoute}}"></app-route>
+        <app-route route="{{subRoute}}" pattern="/:message" data="{{subRouteData}}"></app-route>
 
         <input value="{{routeData.home::input}}" placeholder="Type a page name here.">
-        <a href="/1/test">Home</a>
+        <br />
+        <br />
+        <br />
+        <div>
+            <a href="/1">Home</a><br />
+            <a href="/2/users">Users</a><br />
+            <a href="/3">Page-3</a><br />
+            <a href="/4">Component</a><br />
+            <a href="/5">CSS - styling</a><br />
+        </div>
 
-        <iron-pages id="pages"
-                      selected="[[routeData.home]]"
-                      attr-for-selected="page-name"
-                      selected-attribute="activePage">
+        <iron-pages id="pages-1" selected="[[routeData.home]]" attr-for-selected="page-name" selected-attribute="activePage">
             <routes-home  page-name="1"></routes-home>
         </iron-pages>
+
+        <iron-pages id="pages-2" selected="[[subRouteData.message]]" attr-for-selected="page-name" selected-attribute="activePage">
+            <routes-users page-name="users" data="{{subRouteData.message}}"></routes-users>
+        </iron-pages>
+
+        <iron-pages id="pages-3" selected="[[routeData.home]]" attr-for-selected="page-name" selected-attribute="activePage">
+            <my-element page-name="3">
+              <p class="foo">teste</p>
+              <content>bbb</content>
+            </my-element>
+        </iron-pages>
+
+        <iron-pages id="pages-4" selected="[[routeData.home]]" attr-for-selected="page-name" selected-attribute="activePage">
+            <routes-component  page-name="4"></routes-component>
+        </iron-pages>
+
+        <iron-pages id="pages-5" selected="[[routeData.home]]" attr-for-selected="page-name" selected-attribute="activePage">
+            <routes-css  page-name="5"></routes-css>
+        </iron-pages>
+
+
 
       </template>
 
     <script>
         Polymer({
+
             is: 'routes-app',
             properties:{
               routeData: Object,
+              subRouteData: Object
             },
+            
+
         });
     </script>
   </dom-module>
