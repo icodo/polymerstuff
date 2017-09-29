@@ -1,0 +1,26 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/paper-menu-button/paper-menu-button.html">
+<link rel="import" href="../bower_components/paper-menu/paper-menu.html">
+<link rel="import" href="../bower_components/paper-item/paper-item.html">
+<link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../bower_components/iron-icons/iron-icons.html">
+
+<dom-module id="menu-bank">
+    <template>
+            <paper-menu-button>
+                <paper-icon-button icon="menu" class="dropdown-trigger"></paper-icon-button>
+                <paper-menu class="dropdown-content">
+                    <paper-item>Accounts</paper-item>
+                    <paper-item>Address book</paper-item>
+                    <paper-item>Donate</paper-item>
+                </paper-menu>
+            </paper-menu-button>
+    </template>
+
+    <script>
+        Polymer({
+            is: 'menu-bank'
+        });
+    </script>
+
+</dom-module>

@@ -5,16 +5,13 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import io.swagger.annotations.Api;
-
-@Api(value="Main resource")
-@Path("/main")
+@Path("/login")
 public class MainResource {
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public String main(){
-		return "test";
+		return "logged";
 	}
 	
 }
