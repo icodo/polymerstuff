@@ -43,9 +43,7 @@
             <app-toolbar>
               <paper-icon-button icon="menu" onclick="drawer.toggle()"></paper-icon-button>
               <div main-title>My app</div>
-              <paper-icon-button icon="delete"></paper-icon-button>
-              <paper-icon-button icon="search"></paper-icon-button>
-              <paper-icon-button icon="close"></paper-icon-button>
+              <paper-item>Logout</paper-item>
             </app-toolbar>
       </app-header>
       <app-drawer id="drawer" swipe-open>
@@ -56,13 +54,13 @@
                 <a href="#/home" name="name">Home</a>
               </paper-item>
               <paper-item name="favorites">
-                <a href="#/favorites" name="name">Favorites</a>
+                <a href="#/favorites" name="name">Acounts</a>
               </paper-item>
               <paper-item name="saved">
-                <a href="#/saved" name="name">Saved</a>
+                <a href="#/saved" name="name">Transactions</a>
               </paper-item>
               <paper-item name="trending">
-                <a href="#/trending" name="name">Trending</a>
+                <a href="#/trending" name="name">Donate</a>
               </paper-item>
           </paper-listbox>
       </app-drawer>      
