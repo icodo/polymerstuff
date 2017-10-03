@@ -75,8 +75,8 @@
       <br /><br />
       
       <div align="left">  
-        <paper-input always-float-label label="Username" value="[[user]]"></paper-input>
-        <paper-input always-float-label label="Password" pwd="[[value]]"></paper-input>
+        <paper-input always-float-label label="Username" value="{{user}}"></paper-input>
+        <paper-input always-float-label label="Password" value="{{pwd}}"></paper-input>
         <div align="center">
           <paper-button raised class="indigo" on-tap="_sign">Sign on</paper-button>
         </div>  
@@ -87,15 +87,16 @@
     <script>
         Polymer({
             is: 'bank-login',
-            properties:{
-               user: String
+            properties: {
+                user: String,
+                pwd: String
             },
-            _sign: function(){
-              alert(this.$.user);
+            _sign: function() {
+                debugger;
+                alert("User: " + this.__data__.user + " - Password: " + this.__data__.pwd);
 
             }
         });
-        
     </script>
 
 </dom-module>
