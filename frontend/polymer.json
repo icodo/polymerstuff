@@ -4,6 +4,7 @@
     "fragments": [
         "src/routes-bank.html",
         "src/menu-bank.html",
+        "src/bank-login-service.html",
         "src/menu-layout.html"
     ],
     "sources": [

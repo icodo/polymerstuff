@@ -5,7 +5,7 @@ import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.ws.rs.Consumes;
-import javax.ws.rs.POST;
+import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
@@ -16,12 +16,12 @@ public class MainResource {
 	
 	
 	private Map<String, String> users = new HashMap<String, String>();
-	
-	@POST
+		
+	@GET
 	@Consumes("text/plain")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response main(String message){
-		System.out.println(message);
+	public Response main(){
+		System.out.println("teste");
 		return Response.ok().entity("token: blablabla").build();
 	}
 	
@@ -38,5 +38,6 @@ public class MainResource {
 	private void fillUsers(){
 		users.put("ivan", "123");
 	}
+
 	
 }
