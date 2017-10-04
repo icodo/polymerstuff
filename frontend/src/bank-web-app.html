@@ -2,18 +2,20 @@
 <link rel="import" href="../bower_components/app-route/app-location.html">
 <link rel="import" href="../bower_components/app-route/app-route.html">
 <link rel="import" href="../bower_components/iron-pages/iron-pages.html">
+<link rel="import" href="bank-login.html">
 
-<dom-module id="routes-bank">
+<dom-module id="bank-web-app">
     <template>
-       
+      <bank-login></bank-login>
     </template>
 
     <script>
         Polymer({
-            is: 'routes-bank',
+            is: 'bank-web-app',
             properties: {
                 text: String
             },
         });
     </script>
+
 </dom-module>

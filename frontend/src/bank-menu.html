@@ -1,18 +1,18 @@
-<link rel="import" href="bower_components/polymer/polymer.html">
-<link rel="import" href="bower_components/iron-icons/iron-icons.html">
-<link rel="import" href="bower_components/paper-icon-button/paper-icon-button.html">
-<link rel="import" href="bower_components/paper-progress/paper-progress.html">
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../bower_components/paper-progress/paper-progress.html">
 
-<link rel="import" href="bower_components/paper-menu/paper-menu.html">
-<link rel="import" href="bower_components/paper-item/paper-item.html">
-<link rel="import" href="bower_components/app-layout/app-layout.html">
-<link rel="import" href="bower_components/app-layout/app-toolbar/app-toolbar.html">
-<link rel="import" href="bower_components/app-layout/app-header/app-header.html">
-<link rel="import" href="bower_components/app-layout/app-drawer/app-drawer.html">
+<link rel="import" href="../bower_components/paper-menu/paper-menu.html">
+<link rel="import" href="../bower_components/paper-item/paper-item.html">
+<link rel="import" href="../bower_components/app-layout/app-layout.html">
+<link rel="import" href="../bower_components/app-layout/app-toolbar/app-toolbar.html">
+<link rel="import" href="../bower_components/app-layout/app-header/app-header.html">
+<link rel="import" href="../bower_components/app-layout/app-drawer/app-drawer.html">
 
-<link rel="import" href="bower_components/paper-listbox/paper-listbox.html">
+<link rel="import" href="../bower_components/paper-listbox/paper-listbox.html">
 
-<dom-module id="menu-layout">
+<dom-module id="bank-menu">
     <template>
       <style>
           app-header {
@@ -50,17 +50,18 @@
           <paper-listbox selected="[[_pageData.page]]" 
                           attr-for-selected="name" 
                           on-iron-activate="_drawerSelected">
+                          
               <paper-item name="home">
                 <a href="#/home" name="name">Home</a>
               </paper-item>
-              <paper-item name="favorites">
-                <a href="#/favorites" name="name">Acounts</a>
+              <paper-item name="accounts">
+                <a href="#/accounts" name="name">Accounts</a>
               </paper-item>
-              <paper-item name="saved">
-                <a href="#/saved" name="name">Transactions</a>
+              <paper-item name="transactions">
+                <a href="#/transactions" name="name">Transactions</a>
               </paper-item>
-              <paper-item name="trending">
-                <a href="#/trending" name="name">Donate</a>
+              <paper-item name="donate">
+                <a href="#/donate" name="name">Donate</a>
               </paper-item>
           </paper-listbox>
       </app-drawer>      
@@ -68,7 +69,7 @@
 
     <script>
         Polymer({
-            is: 'menu-layout'
+            is: 'bank-menu'
         });
     </script>
 

@@ -1,0 +1,62 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
+
+<dom-module id="bank-login-service">
+    <template>
+      <iron-ajax id="loginRequest"
+        handle-as="json"
+        content-type="application/json"
+        on-response="_handleResponse"
+        on-error="_handleError"
+        >
+      </iron-ajax>    
+  </template>
+
+    <script>
+        Polymer({
+            is: 'bank-login-service',
+            properties: {
+                baseUrl: {
+                    type: String,
+                    value: function() {
+                        if (location.hostname == 'localhost' && location.port != 80) {
+                            return 'https://banq.qafe.com/rest/v0';
+                        } else {
+                            var url = window.location.protocol + "//" + window.location.hostname + (window.location.port ? ':' + window.location.port : '');
+                            return url + '/rest/v0/';
+                        }
+                    }
+                },
+            },
+
+
+            _handleResponse: function(response) {
+                debugger;
+                alert(response);
+            },
+
+            _handleError: function(error) {
+                debugger;
+                if (error) {
+                    if (error.status == '403' && error.response.status == 'AUTHORIZATION_TOKEN_INVALID') {
+                        this.fire('token-invalid', error.response);
+                    } else {
+                        this.fire('message', error.response);
+                    }
+                }
+            },
+
+            generateGetRequest: function() {
+                var body = {};
+                body.emailaddress = "kboes";
+                body.password = "pass00";
+
+                this.$.loginRequest.method = "POST";
+                this.$.loginRequest.headers = {};
+                this.$.loginRequest.body = body;
+                this.$.loginRequest.url = this.baseUrl + "/login";
+                this.$.loginRequest.generateRequest();
+            },
+        });
+    </script>
+</dom-module>

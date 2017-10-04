@@ -18,11 +18,11 @@ public class MainResource {
 	private Map<String, String> users = new HashMap<String, String>();
 		
 	@GET
-	@Consumes("text/plain")
-	@Produces(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.TEXT_PLAIN)
 	public Response main(){
-		System.out.println("teste");
-		return Response.ok().entity("token: blablabla").build();
+		Response response = Response.ok().entity("blablabla").build();
+		System.out.println(response.getEntity());
+		return response;
 	}
 	
 	private boolean checkUser(String user, String password){

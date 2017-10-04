@@ -1,11 +1,11 @@
 {
     "entrypoint": "index.html",
-    "shell": "routes-bank.html",
+    "shell": "bank-web-app.html",
     "fragments": [
-        "src/routes-bank.html",
-        "src/menu-bank.html",
+        "src/bank-web-app.html",
+        "src/bank-menu.html",
         "src/bank-login-service.html",
-        "src/menu-layout.html"
+        "src/bank-login.html"
     ],
     "sources": [
         "src/**/*",
