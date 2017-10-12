@@ -19,9 +19,8 @@
                 baseUrl: {
                     type: String,
                     value: function() {
-                        if (location.hostname == 'localhost' && location.port != 80) {
-                            return 'https://banq.qafe.com/rest/v0';
-                        } else {
+                        return 'https://banq.qafe.com/rest/v0';
+                        if (location.hostname == 'localhost' && location.port != 80) {} else {
                             var url = window.location.protocol + "//" + window.location.hostname + (window.location.port ? ':' + window.location.port : '');
                             return url + '/rest/v0/';
                         }
@@ -31,12 +30,10 @@
 
 
             _handleResponse: function(response) {
-                debugger;
-                alert(response);
+                alert(response.detail.__data.response.token);
             },
 
             _handleError: function(error) {
-                debugger;
                 if (error) {
                     if (error.status == '403' && error.response.status == 'AUTHORIZATION_TOKEN_INVALID') {
                         this.fire('token-invalid', error.response);
