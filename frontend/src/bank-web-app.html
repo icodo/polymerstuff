@@ -3,19 +3,75 @@
 <link rel="import" href="../bower_components/app-route/app-route.html">
 <link rel="import" href="../bower_components/iron-pages/iron-pages.html">
 <link rel="import" href="bank-login.html">
-<link rel="import" href="bank-menu.html">
+
 
 <dom-module id="bank-web-app">
     <template>
-      <bank-menu></bank-menu>
+
+        <app-location route="{{route}}"></app-location>
+        <app-route route="{{route}}" pattern="/:home" data="{{routeData}}" tail="{{subRoute}}"></app-route>
+        
+        <iron-pages id="menu" selected="[[routeData.page]]" attr-for-selected="page-name" selected-attribute="activePage">
+            <bank-login page-name="login"></bank-login>
+        </iron-pages>
+
     </template>
 
     <script>
         Polymer({
             is: 'bank-web-app',
             properties: {
-                text: String
+                text: String,
+                token: String,
+                routeData: Object,
+                page: {
+                    type: String,
+                    observer: '_pageChanged'
+                },
             },
+
+
+            listeners: {
+                'token-valid': '_handleValidToken',
+                'message': '_showMessage',
+                'routing': '_routing',
+            },
+
+            _handleInvalidToken: function(token) {
+                alert("Houston, we have a problem.");
+            },
+
+            _handleValidToken: function(token) {
+                this.token = token.detail;
+                this.fire('routing', 'menu');
+            },
+
+            _routing: function(e) {
+                alert("routing" + e.detail);
+                this.routeData.home = e.detail;
+            },
+
+            _showMessage: function(e) {
+                if (e.detail.message) {
+                    alert(e.detail.message);
+                } else {
+                    alert(e.detail);
+                }
+            },
+
+            _pageChanged: function(page) {
+                var url;
+                switch (page) {
+                    case 'login':
+                        url = this.resolveUrl('bank-login.html');
+                        break;
+
+                    default:
+                        url = this.resolveUrl('bank-login.html');
+                }
+                this.importHref(url, null, null, true);
+            },
+
         });
     </script>
 

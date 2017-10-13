@@ -38,34 +38,35 @@
             color: black;
           }
       </style>
-
-    
-      <app-drawer id="drawer" swipe-open>
-          <paper-listbox selected="[[_pageData.page]]" attr-for-selected="name" on-iron-activate="_drawerSelected">                          
-              <paper-item name="home">
-                <a href="#/home" name="name">Home</a>
-              </paper-item>
-              <paper-item name="accounts">
-                <a href="#/accounts" name="name">Accounts</a>
-              </paper-item>
-              <paper-item name="transactions">
-                <a href="#/transactions" name="name">Transactions</a>
-              </paper-item>
-              <paper-item name="donate">
-                <a href="#/donate" name="name">Donate</a>
-              </paper-item>
-          </paper-listbox>
-      </app-drawer>
-      
+ 
       
     <app-header>
+          <div main-title>App name</div>
         <app-toolbar>
-            <paper-icon-button icon="menu"></paper-icon-button>
-            <div main-title>App name</div>
+          <paper-icon-button icon="menu"></paper-icon-button>
+        </app-toolbar>
+          </app-toolbar>
+          <app-toolbar>
             <paper-icon-button icon="search"></paper-icon-button>
           </app-toolbar>
     </app-header>
 
+    <app-drawer id="drawer" swipe-open>
+        <paper-listbox selected="[[_pageData.page]]" attr-for-selected="name" on-iron-activate="_drawerSelected">                          
+            <paper-item name="home">
+              <a href="#/home" name="name">Home</a>
+            </paper-item>
+            <paper-item name="accounts">
+              <a href="#/accounts" name="name">Accounts</a>
+            </paper-item>
+            <paper-item name="transactions">
+              <a href="#/transactions" name="name">Transactions</a>
+            </paper-item>
+            <paper-item name="donate">
+              <a href="#/donate" name="name">Donate</a>
+            </paper-item>
+        </paper-listbox>
+    </app-drawer>
 
 
     </template>

@@ -16,6 +16,8 @@
         Polymer({
             is: 'bank-login-service',
             properties: {
+                user: String,
+                password: String,
                 baseUrl: {
                     type: String,
                     value: function() {
@@ -28,31 +30,34 @@
                 },
             },
 
-
             _handleResponse: function(response) {
-                alert(response.detail.__data.response.token);
+                if (response.detail.__data.response.token) {
+                    this.fire('token-valid', response.detail.__data.response.token);
+                }
             },
 
             _handleError: function(error) {
                 if (error) {
-                    if (error.status == '403' && error.response.status == 'AUTHORIZATION_TOKEN_INVALID') {
-                        this.fire('token-invalid', error.response);
+                    if (error.detail.request.__data.status == '403') {
+                        this.fire('message', error.detail.request.__data.response);
+                    } else if (error.detail.request.__data.status == '400') {
+                        this.fire('message', "You have to fill this fields caralho.");
                     } else {
-                        this.fire('message', error.response);
+                        this.fire('token-invalid', error.response);
                     }
                 }
             },
 
             generateGetRequest: function() {
                 var body = {};
-                body.emailaddress = "kboes";
-                body.password = "pass00";
-
+                body.emailaddress = this.user;
+                body.password = this.password;
                 this.$.loginRequest.method = "POST";
                 this.$.loginRequest.headers = {};
                 this.$.loginRequest.body = body;
                 this.$.loginRequest.url = this.baseUrl + "/login";
                 this.$.loginRequest.generateRequest();
+
             },
         });
     </script>

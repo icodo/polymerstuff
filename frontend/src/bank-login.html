@@ -78,16 +78,14 @@
       
       <div align="left">  
         <paper-input always-float-label label="Username" value="{{user}}"></paper-input>
-        <paper-input always-float-label label="Password" value="{{pwd}}"></paper-input>
+        <paper-input always-float-label label="Password" value="{{password}}"></paper-input>
         <div align="center">
           <br />
           <br />
           <paper-button raised class="indigo" on-tap="_sign">Sign on</paper-button>
         </div>  
       </div>
-      <bank-login-service id="loginService" >
-
-      </bank-login-service>
+      <bank-login-service id="loginService"></bank-login-service>
         
     </template>
 
@@ -96,11 +94,15 @@
             is: 'bank-login',
             properties: {
                 user: String,
-                pwd: String
+                password: String
             },
+
             _sign: function() {
+                this.$.loginService.user = this.user;
+                this.$.loginService.password = this.password;
                 this.$.loginService.generateGetRequest();
-            }
+            },
+
         });
     </script>
 

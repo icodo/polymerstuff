@@ -1,0 +1,110 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/app-layout/app-header/app-header.html">
+<link rel="import" href="../bower_components/app-layout/app-drawer/app-drawer.html">
+<link rel="import" href="../bower_components/app-layout/app-toolbar/app-toolbar.html">
+<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="../bower_components/paper-progress/paper-progress.html">
+<link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../bower_components/paper-listbox/paper-listbox.html">
+<link rel="import" href="../bower_components/app-layout/app-layout.html">
+
+
+<dom-module id="bank-menu2">
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+    </head>
+    <template>
+      <style>
+       
+        app-toolbar {
+          color: #fff;
+          width: 50%;
+        }
+
+        paper-icon-button {
+          --paper-icon-button-ink-color: white;
+        }
+
+        paper-icon-button + [main-title] {
+          margin-left: 24px;
+        }
+
+        paper-icon-button{
+          margin-left: 24px;
+        }
+        
+        paper-progress {
+          display: block;
+          --paper-progress-active-color: rgba(255, 255, 255, 0.0);
+          --paper-progress-container-color: transparent;
+        }
+
+        app-header {
+            background-color: #4285f4;
+            margin-top: -10px;
+            margin-left: -10px;
+            margin-right: -10px;
+        }
+
+        app-drawer {
+          --app-drawer-scrim-background: rgba(0, 0, 100, 0.0);
+          --app-drawer-content-container: {
+            background-color: #B0BEC5;
+            
+          }
+        }
+
+        paper-item {
+            height: 30px;
+        }
+          
+        paper-item > a {
+          line-height: 40px;
+          text-align: center;
+          text-decoration: none;
+        }
+        
+</style>
+
+  <app-header reveals>  
+    <app-toolbar >
+        <div main-title>My app</div>
+          <paper-icon-button icon="menu" on-tap="_openDrawer"></paper-icon-button>
+          <paper-icon-button icon="exit-to-app"><paper-icon-button>
+    </app-toolbar>
+  </app-header>
+  
+  <app-drawer id="drawer" swipe-open>
+    <paper-listbox>                          
+      <paper-item name="home">
+        <a href="#/home" name="name">Home</a>
+      </paper-item><br />
+      <paper-item name="accounts">
+        <a href="#/accounts" name="name">Accounts</a>
+      </paper-item><br />
+      <paper-item name="transactions">
+        <a href="#/transactions" name="name">Transactions</a>
+      </paper-item><br />
+      <paper-item name="donate">
+        <a href="#/donate" name="name">Donate</a>
+      </paper-item>
+    </paper-listbox>
+  </app-drawer>
+</template>
+
+    <script>
+        Polymer({
+            is: 'bank-menu2',
+            properties: {
+
+            },
+
+            _openDrawer: function() {
+                this.$.drawer.toggle();
+            },
+        });
+    </script>
+</dom-module>
