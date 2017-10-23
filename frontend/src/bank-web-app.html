@@ -7,10 +7,8 @@
 
 <dom-module id="bank-web-app">
     <template>
-
         <app-location route="{{route}}"></app-location>
         <app-route route="{{route}}" pattern="/:page" data="{{page}}" tail="{{tail}}"></app-route>
-
         <iron-pages id="menu" selected="[[page]]" attr-for-selected="page-name" selected-attribute="activePage">
           <bank-login page-name="login"></bank-login>
         </iron-pages>
@@ -24,7 +22,7 @@
                 text: String,
                 token: String,
                 page: {
-                    type: Object,
+                    type: String,
                     observer: '_pageChanged'
                 },
 
@@ -59,16 +57,8 @@
             },
 
             _pageChanged: function(page) {
-                var url;
-                switch (page) {
-                    case 'login':
-                        this._routing(page);
-                        break;
-
-                    default:
-                        url = this.resolveUrl('bank-login.html');
-                }
-                //this.importHref(url, null, null, true);
+                console.log("route changed: " + page);
+                this.route.path = page;
             },
 
         });
