@@ -9,10 +9,10 @@
     <template>
 
         <app-location route="{{route}}"></app-location>
-        <app-route route="{{route}}" pattern="/:home" data="{{routeData}}" tail="{{subRoute}}"></app-route>
-        
-        <iron-pages id="menu" selected="[[routeData.page]]" attr-for-selected="page-name" selected-attribute="activePage">
-            <bank-login page-name="login"></bank-login>
+        <app-route route="{{route}}" pattern="/:page" data="{{page}}" tail="{{tail}}"></app-route>
+
+        <iron-pages id="menu" selected="[[page]]" attr-for-selected="page-name" selected-attribute="activePage">
+          <bank-login page-name="login"></bank-login>
         </iron-pages>
 
     </template>
@@ -23,13 +23,12 @@
             properties: {
                 text: String,
                 token: String,
-                routeData: Object,
                 page: {
-                    type: String,
+                    type: Object,
                     observer: '_pageChanged'
                 },
-            },
 
+            },
 
             listeners: {
                 'token-valid': '_handleValidToken',
@@ -38,7 +37,7 @@
             },
 
             _handleInvalidToken: function(token) {
-                alert("Houston, we have a problem.");
+                alert("Caralho, you don't have a token.");
             },
 
             _handleValidToken: function(token) {
@@ -47,8 +46,8 @@
             },
 
             _routing: function(e) {
-                alert("routing" + e.detail);
-                this.routeData.home = e.detail;
+                this.page = e;
+                this.set('route.path', '/login');
             },
 
             _showMessage: function(e) {
@@ -63,13 +62,13 @@
                 var url;
                 switch (page) {
                     case 'login':
-                        url = this.resolveUrl('bank-login.html');
+                        this._routing(page);
                         break;
 
                     default:
                         url = this.resolveUrl('bank-login.html');
                 }
-                this.importHref(url, null, null, true);
+                //this.importHref(url, null, null, true);
             },
 
         });
