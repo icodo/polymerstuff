@@ -12,7 +12,6 @@
 <link rel="import" href="bower_components/paper-listbox/paper-listbox.html">
 <link rel="import" href="bower_components/iron-demo-helpers/demo-pages-shared-styles.html">
 
-
 <dom-module id="routes-app">
 
     <template>
@@ -30,20 +29,14 @@
         <app-route route="{{route}}" pattern="/:page" data="{{data}}" tail="{{subRoute}}"></app-route>
         <app-route route="{{subRoute}}" pattern="/:message" data="{{subRouteData}}"></app-route>
 
-
-
-
-        <paper-dropdown-menu label="Dinosaurs">
+        <paper-dropdown-menu label="Dinosaurs" value="{{data.page}}">
             <paper-listbox class="dropdown-content" selected="1">
-              <paper-item>allosaurus</paper-item>
-              <paper-item>brontosaurus</paper-item>
-              <paper-item>carcharodontosaurus</paper-item>
-              <paper-item>diplodocus</paper-item>
+              <paper-item>1</paper-item>
+              <paper-item>2</paper-item>
+              <paper-item>3</paper-item>
+              <paper-item>4</paper-item>
             </paper-listbox>
           </paper-dropdown-menu>
-
-
-        
 
         <input value="{{data.page::input}}" placeholder="Type a page name here.">
         <br />
@@ -73,8 +66,6 @@
             <routes-css  page-name="5"></routes-css>
         </iron-pages>
 
-
-
       </template>
 
     <script>
@@ -82,10 +73,22 @@
 
             is: 'routes-app',
             properties: {
+                selecao: {
+                    type: String,
+                    notify: true,
+                },
                 data: Object,
                 subRouteData: Object
             },
 
+            observers: [
+                '_alteraSelecao(selecao)',
+            ],
+
+            _alteraSelecao: function(selecao) {
+                this.data.page = selecao;
+                console.log(this.data.page);
+            },
 
         });
     </script>
