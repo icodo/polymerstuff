@@ -1,0 +1,92 @@
+<link rel="import" href="bower_components/polymer/polymer.html">
+<link rel="import" href="my-element.html">
+<link rel="import" href="routes-home.html">
+<link rel="import" href="routes-users.html">
+<link rel="import" href="routes-component.html">
+<link rel="import" href="routes-css.html">
+<link rel="import" href="bower_components/app-route/app-location.html">
+<link rel="import" href="bower_components/app-route/app-route.html">
+<link rel="import" href="bower_components/iron-pages/iron-pages.html">
+<link rel="import" href="bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
+<link rel="import" href="bower_components/paper-item/paper-item.html">
+<link rel="import" href="bower_components/paper-listbox/paper-listbox.html">
+<link rel="import" href="bower_components/iron-demo-helpers/demo-pages-shared-styles.html">
+
+
+<dom-module id="routes-app">
+
+    <template>
+        <style is="custom-style" include="demo-pages-shared-styles">
+          paper-dropdown-menu, paper-listbox {
+            width: 250px;
+          }
+          paper-dropdown-menu {
+            height: 200px;
+            margin: auto;
+            display: block;
+          }
+        </style>
+        <app-location route="{{route}}"></app-location>
+        <app-route route="{{route}}" pattern="/:page" data="{{data}}" tail="{{subRoute}}"></app-route>
+        <app-route route="{{subRoute}}" pattern="/:message" data="{{subRouteData}}"></app-route>
+
+
+
+
+        <paper-dropdown-menu label="Dinosaurs">
+            <paper-listbox class="dropdown-content" selected="1">
+              <paper-item>allosaurus</paper-item>
+              <paper-item>brontosaurus</paper-item>
+              <paper-item>carcharodontosaurus</paper-item>
+              <paper-item>diplodocus</paper-item>
+            </paper-listbox>
+          </paper-dropdown-menu>
+
+
+        
+
+        <input value="{{data.page::input}}" placeholder="Type a page name here.">
+        <br />
+        <br />
+        <br />
+
+        <iron-pages id="pages-1" selected="[[data.page]]" attr-for-selected="page-name" selected-attribute="activePage">
+            <routes-home  page-name="1"></routes-home>
+        </iron-pages>
+
+        <iron-pages id="pages-2" selected="[[subRouteData.message]]" attr-for-selected="page-name" selected-attribute="activePage">
+            <routes-users page-name="users" data="{{subRouteData.message}}"></routes-users>
+        </iron-pages>
+
+        <iron-pages id="pages-3" selected="[[data.page]]" attr-for-selected="page-name" selected-attribute="activePage">
+            <my-element page-name="3">
+              <p class="foo">teste</p>
+              <content>bbb</content>
+            </my-element>
+        </iron-pages>
+
+        <iron-pages id="pages-4" selected="[[data.page]]" attr-for-selected="page-name" selected-attribute="activePage">
+            <routes-component  page-name="4"></routes-component>
+        </iron-pages>
+
+        <iron-pages id="pages-5" selected="[[data.page]]" attr-for-selected="page-name" selected-attribute="activePage">
+            <routes-css  page-name="5"></routes-css>
+        </iron-pages>
+
+
+
+      </template>
+
+    <script>
+        Polymer({
+
+            is: 'routes-app',
+            properties: {
+                data: Object,
+                subRouteData: Object
+            },
+
+
+        });
+    </script>
+</dom-module>

@@ -8,8 +8,10 @@
 <dom-module id="bank-web-app">
     <template>
         <app-location route="{{route}}"></app-location>
-        <app-route route="{{route}}" pattern="/:page" data="{{page}}" tail="{{tail}}"></app-route>
-        <iron-pages id="menu" selected="[[page]]" attr-for-selected="page-name" selected-attribute="activePage">
+        <app-route route="{{route}}" pattern="/:page" data="{{data}}" tail="{{subRoute}}"></app-route>
+        <app-route route="{{subRoute}}" pattern="/:message" data="{{subRouteData}}" tail="{{subRouteData}}"></app-route>
+        
+        <iron-pages id="login-page" selected="[[data.page]]" attr-for-selected="page-name" selected-attribute="activePage">
           <bank-login page-name="login"></bank-login>
         </iron-pages>
 
@@ -21,11 +23,8 @@
             properties: {
                 text: String,
                 token: String,
-                page: {
-                    type: String,
-                    observer: '_pageChanged'
-                },
-
+                data: Object,
+                subRouteData: Object
             },
 
             listeners: {
