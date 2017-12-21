@@ -1,0 +1,99 @@
+<link rel="import" href="./bower_components/polymer/polymer.html">
+<link rel="import" href="./bower_components/app-route/app-location.html">
+<link rel="import" href="./bower_components/app-route/app-route.html">
+<link rel="import" href="./bower_components/iron-pages/iron-pages.html">
+<link rel="import" href="./bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
+<link rel="import" href="./bower_components/paper-item/paper-item.html">
+<link rel="import" href="./bower_components/paper-listbox/paper-listbox.html">
+<link rel="import" href="./bower_components/iron-demo-helpers/demo-pages-shared-styles.html">
+
+
+< <dom-module id="bank-web-app">
+    <template>
+        <app-location route="{{route}}"></app-location>
+        <app-route route="{{route}}" pattern="/:page" data="{{data}}" tail="{{subRoute}}"></app-route>
+        <app-route route="{{subRoute}}" pattern="/:message" data="{{subRouteData}}"></app-route>
+       
+        <iron-pages id="login-page" selected="{{data.page}}" attr-for-selected="page-name" selected-attribute="activePage">
+          <bank-login page-name="login"></bank-login>
+        </iron-pages>
+
+        <iron-pages id="menu-page" selected="{{data.page}}" attr-for-selected="page-name" selected-attribute="activePage">
+          <bank-login page-name="menu"></bank-login>
+        </iron-pages>
+
+    </template>
+
+    <script>
+        Polymer({
+            is: 'bank-web-app',
+            properties: {
+                text: String,
+                token: String,
+                data: Object,
+                subRouteData: Object
+            },
+
+            observers: [
+                '_dataChanged(data)',
+            ],
+
+            listeners: {
+                'token-valid': '_handleValidToken',
+                'message': '_showMessage',
+                'routing': '_routing',
+            },
+
+            _handleInvalidToken: function(token) {
+                alert("Caralho, you don't have a token.");
+            },
+
+            _handleValidToken: function(token) {
+                debugger;
+                this.token = token.detail;
+                if (this.token != undefined) {
+                    this.fire('routing', 'menu');
+                }
+            },
+
+            _routing: function(e) {
+                debugger;
+                this.set('route.path', e.detail);
+            },
+
+            _showMessage: function(e) {
+                if (e.detail.message) {
+                    alert(e.detail.message);
+                } else {
+                    alert(e.detail);
+                }
+            },
+
+            _dataChanged: function(data) {
+
+                if (data != null && data.page != '' && this.token != undefined) {
+                    console.log("route changed: " + data);
+                    var url;
+
+                    switch (data.page) {
+                        case 'login':
+                            url = this.resolveUrl('src/bank-login.html');
+                            this.importHref(url, null, null, null);
+                            break;
+                        case 'menu':
+                            this.data.page = 'menu';
+                            url = this.resolveUrl('src/bank-menu.html');
+                            this.importHref(url, null, null, null);
+                            this.set('route.path', '/menu');
+                            break;
+                        default:
+                    }
+                } else {
+                    url = this.resolveUrl('src/bank-login.html');
+                    this.importHref(url, null, null, null);
+                    this.set('route.path', '/login');
+                }
+            },
+        });
+    </script>
+    </dom-module>

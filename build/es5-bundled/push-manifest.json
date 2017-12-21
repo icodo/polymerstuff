@@ -1,0 +1,11 @@
+{
+  "bank-web-app.html": {},
+  "src/bank-menu.html": {},
+  "src/bank-login-service.html": {},
+  "src/bank-login.html": {
+    "src/bank-login-service.html": {
+      "type": "document",
+      "weight": 1
+    }
+  }
+}

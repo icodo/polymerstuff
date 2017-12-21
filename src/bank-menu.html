@@ -1,0 +1,96 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../bower_components/paper-progress/paper-progress.html">
+
+<link rel="import" href="../bower_components/paper-menu/paper-menu.html">
+<link rel="import" href="../bower_components/paper-item/paper-item.html">
+<link rel="import" href="../bower_components/app-layout/app-layout.html">
+<link rel="import" href="../bower_components/app-layout/app-toolbar/app-toolbar.html">
+<link rel="import" href="../bower_components/app-layout/app-header/app-header.html">
+<link rel="import" href="../bower_components/app-layout/app-drawer/app-drawer.html">
+
+<link rel="import" href="../bower_components/paper-listbox/paper-listbox.html">
+
+<dom-module id="bank-menu">
+    <template>
+      <style>
+          app-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #4285f4;
+            color: #fff;
+          }
+          app-header paper-icon-button {
+            --paper-icon-button-ink-color: white;
+          }
+          paper-item {
+            height: 4px;
+          }
+          paper-item > a {
+            width: 100%;
+            height: 100%;
+            line-height: 454px;
+            text-align: center;
+            text-decoration: none;
+            color: black;
+          }
+      </style>
+ 
+ 
+ <app-route route="{{route}}" pattern="/:page"></app-route>
+    <app-header>
+          <div main-title>App name</div>
+        <app-toolbar>
+          <paper-icon-button icon="menu"></paper-icon-button>
+        </app-toolbar>
+          </app-toolbar>
+          <app-toolbar>
+            <paper-icon-button icon="search"></paper-icon-button>
+          </app-toolbar>
+    </app-header>
+
+    <app-drawer id="drawer" swipe-open>
+        <paper-listbox selected="[[_pageData.page]]" attr-for-selected="name" on-iron-activate="_drawerSelected">                          
+            <paper-item name="home">
+              <a href="#/home" name="name">Home</a>
+            </paper-item>
+            <paper-item name="accounts">
+              <a href="#/accounts" name="name">Accounts</a>
+            </paper-item>
+            <paper-item name="transactions">
+              <a href="#/transactions" name="name">Transactions</a>
+            </paper-item>
+            <paper-item name="donate">
+              <a href="#/donate" name="name">Donate</a>
+            </paper-item>
+        </paper-listbox>
+    </app-drawer>
+
+
+    </template>
+
+    <script>
+        Polymer({
+            is: 'bank-menu',
+            properties: {
+                user: String,
+                password: String,
+                data: Object,
+                subRouteData: Object
+            },
+
+            listeners: {
+                'tap': 'openDrawer',
+            },
+
+            openDrawer: function() {
+                this.$.drawer.toggle();
+            },
+
+        });
+    </script>
+
+</dom-module>

@@ -1,0 +1,67 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
+
+<dom-module id="bank-login-service">
+    <template>
+      <iron-ajax id="loginRequest"
+        handle-as="json"
+        content-type="application/json"
+        on-response="_handleResponse"
+        on-error="_handleError"
+        >
+      </iron-ajax>    
+  </template>
+
+    <script>
+        Polymer({
+            is: 'bank-login-service',
+            properties: {
+                user: String,
+                password: String,
+                baseUrl: {
+                    type: String,
+                    value: function() {
+                        return 'https://banq.qafe.com/rest/v0';
+                        if (location.hostname == 'localhost' && location.port != 80) {} else {
+                            var url = window.location.protocol + "//" + window.location.hostname + (window.location.port ? ':' + window.location.port : '');
+                            return url + '/rest/v0/';
+                        }
+                    }
+                },
+            },
+
+            _handleResponse: function(response) {
+                if (response.detail.__data.response.token) {
+                    this.fire('token-valid', response.detail.__data.response.token);
+                }
+
+            },
+
+            _handleError: function(error) {
+                debugger;
+                this.fire('token-valid', 'asdasdasdasdasd');
+                if (error) {
+                    if (error.detail.request.__data.status == '403') {
+                        this.fire('message', error.detail.request.__data.response);
+                    } else if (error.detail.request.__data.status == '400') {
+                        this.fire('message', "You have to fill this fields caralho.");
+                    } else {
+                        this.fire('token-invalid', error.response);
+                    }
+                }
+            },
+
+            generateGetRequest: function() {
+                var body = {};
+                body.emailaddress = this.user;
+                body.password = this.password;
+                this.$.loginRequest.method = "POST";
+                this.$.loginRequest.headers = {};
+                this.$.loginRequest.body = body;
+                this.$.loginRequest.url = this.baseUrl + "/login";
+                this.$.loginRequest.generateRequest();
+
+            },
+        });
+    </script>
+</dom-module>
