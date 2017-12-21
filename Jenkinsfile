@@ -2,14 +2,10 @@ pipeline{
   agent none
   stages{
     stage('First step'){
+      agent any
       steps{
-        agent any
         echo "Testing first step"
       }
     }
   }
-
-
-
-
 }
