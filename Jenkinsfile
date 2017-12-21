@@ -1,9 +1,9 @@
 pipeline{
   agent none
-  echo "Testing first step"
   stages{
     stage('First step'){
       steps{
+        echo "Testing first step"
         agent any
       }
     }
