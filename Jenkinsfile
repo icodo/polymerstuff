@@ -5,7 +5,9 @@ pipeline{
       agent any
       steps{
         sh 'ls -ltrh'
-        sh 'pwd' 
+        sh 'pwd'
+        sh 'cd ci'
+        sh 'docker build .' 
         echo "Testing first step"
       }
     }
