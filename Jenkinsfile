@@ -8,10 +8,9 @@ pipeline{
             }
         }
     stage('Build') {
-            agent { dockerfile { dir 'ci' } }
+            agent any
             steps {
-                sh './build.sh'
-                stash includes: 'build/', name: 'app'
+                sh 'docker version'
             }
         }
       }
