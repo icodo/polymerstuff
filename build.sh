@@ -1,2 +1,1 @@
-cd ci/
 docker build .
