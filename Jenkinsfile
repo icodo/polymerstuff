@@ -1,16 +1,18 @@
 pipeline{
   agent none
   stages{
-    stage('First step'){
-      agent any
-      steps{
-        sh 'ls -ltrh'
-        sh 'pwd'
-        sh 'ls -ltrh'
-        sh 'pwd'
-        sh 'docker build .' 
-        echo "Testing first step"
+    stage('Clean') {
+            agent any
+            steps {
+                deleteDir()
+            }
+        }
+    stage('Build') {
+            agent { dockerfile { dir 'ci' } }
+            steps {
+                sh './build.sh'
+                stash includes: 'build/', name: 'app'
+            }
+        }
       }
     }
-  }
-}

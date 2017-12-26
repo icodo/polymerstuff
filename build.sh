@@ -1,0 +1,2 @@
+cd ci/
+docker build .
