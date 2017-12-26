@@ -2,7 +2,7 @@ pipeline{
   agent none
   stages{
     stage('First step'){
-      agent any
+      agent { dockerfile { dir 'ci' } }
       steps{
         sh 'ls -ltrh'
         sh 'pwd'
