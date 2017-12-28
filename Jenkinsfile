@@ -8,9 +8,9 @@ pipeline{
             }
         }
     stage('Build') {
-            agent any
+            agent { dockerfile { dir 'ci' } }
             steps {
-                sh 'docker version'
+                sh 'docker build .'
             }
         }
       }
